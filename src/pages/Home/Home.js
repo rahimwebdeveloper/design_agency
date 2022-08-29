@@ -2,15 +2,19 @@ import React from 'react';
 import Services from './Services';
 import TopBanner from './TopBanner';
 import Profile from './Profile';
+import Feedback from './Feedback';
+import Footer from './Footer';
 
 const Home = () => {
     return (
-        <div className='mb-20'>
-            <TopBanner ></TopBanner>
-            <Services></Services>
-            <Profile></Profile>
+        <div>
+            <TopBanner />
+            <Services />
+            <Profile />
+            <Feedback />
+            <Footer />
 
-        </div >
+        </div>
     );
 };
 

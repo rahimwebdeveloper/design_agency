@@ -6,7 +6,6 @@ import Service from './Service';
 
 const Services = () => {
 
-
     return (
         <div className='mt-52 mx-[135px]'>
             <h1 className='text-4xl font-bold text-center'>Provide awesome <span className='text-accent'>services</span></h1>
