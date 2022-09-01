@@ -17,7 +17,11 @@ const TopBanner = () => {
     ]
     return (
         <section className='pb-5'>
-            <div className='bg-primary pt-5 px-[135px] flex items-center pb-5' >
+            <div className='bg-primary pt-5 px-[135px] flex items-center pb-5' 
+            style={{
+                clipPath: "polygon(0 0, 100% 0, 100% 95%, 0% 100%)"
+            }}
+             >
                 <div className='lg:mr-[100px]'>
                     <h1 className='text-5xl leading-tight mb-2 font-bold'>Let’s Grow Your Brand To The Next Level</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus commodo ipsum duis laoreet maecenas. Feugiat</p>
@@ -32,7 +36,7 @@ const TopBanner = () => {
                     logos.map(l => <img className='h-[56px]' src={l} alt=''></img>)
                 }
             </div>
-        </section>
+        </section >
     );
 };
 
