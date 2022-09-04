@@ -3,7 +3,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 
 const ServiceList = () => {
-    const [user, loading ] = useAuthState(auth);
+    const [user, loading] = useAuthState(auth);
 
     if (loading) {
         return <div>
@@ -14,8 +14,8 @@ const ServiceList = () => {
 
     return (
         <div>
-            
-            <div className='bg-primary flex items-center justify-between py-2 px-12'>
+
+            <div className='bg-white flex items-center justify-between py-2 px-12'>
                 <h1 className='text-2xl font-bold'> Service List</h1>
                 <div className='flex items-center'>
                     <div className="avatar">
@@ -26,7 +26,9 @@ const ServiceList = () => {
                     <h1 className='text-2xl ml-3'>{displayName}</h1>
                 </div>
             </div>
-
+            <div className='m-10'>
+                
+            </div>
             <h1>this is service list </h1>
         </div>
     );

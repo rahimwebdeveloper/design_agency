@@ -1,15 +1,26 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logos/logo.png';
 import google from '../../assets/images/google.png';
 import auth from '../../firebase.init';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth'
 
 const Login = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || "/";
 
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
 
-    
+    if(loading){
+        return <p> this loading this page</p>
+    }
+
+    if(user){
+        navigate(from, { replace: true });
+    }
+
 
     return (
         <div className=' h-screen flex justify-center items-center'>

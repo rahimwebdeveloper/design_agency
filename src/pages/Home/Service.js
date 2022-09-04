@@ -1,14 +1,17 @@
 import React from 'react';
 
-const Service = ({ text, title, img, boxShadow }) => {
+const Service = ({ service }) => {
+    const { title, image, descriptions, boxShadow} = service;
+
+
     return (
-        <div className={`card   ${boxShadow}`}>
+        <div className={`card  ${boxShadow} `}>
             <figure>
-                <img className='h-24 w-24' src={img} alt="logo" />
+                <img className='h-24 w-24' src={image} alt="logo" />
             </figure>
             <div className="card-body items-center text-center">
                 <h2 className="card-title">{title}</h2>
-                <p>{text}</p>
+                <p>{descriptions}</p>
             </div>
         </div>
     );

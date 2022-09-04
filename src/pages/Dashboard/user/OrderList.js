@@ -14,7 +14,7 @@ const OrderList = () => {
 
     return (
         <div>
-            <div className='bg-primary flex items-center justify-between py-2 px-12'>
+            <div className='bg-white flex items-center justify-between py-2 px-12'>
                 <h1 className='text-2xl font-bold'>Order List </h1>
                 <div className='flex items-center'>
                     <div className="avatar">

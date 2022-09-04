@@ -33,7 +33,7 @@ const TopBanner = () => {
             </div>
             <div className='grid grid-cols-5 gap-20 lg:mx-44 mt-16'>
                 {
-                    logos.map(l => <img className='h-[56px]' src={l} alt=''></img>)
+                    logos.map(l => <img key={l} className='h-[56px]' src={l} alt=''></img>)
                 }
             </div>
         </section >
