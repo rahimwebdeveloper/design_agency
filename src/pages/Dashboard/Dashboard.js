@@ -5,11 +5,10 @@ import addAdmin from '../../assets/images/addAdmin.svg' ;
 import plus from '../../assets/images/plus.svg' ;
 import list  from '../../assets/images/serviceList.svg';
 import review from '../../assets/images/review.svg';
-import cart from '../../assets/images/cart.svg' ;
 
 const Dashboard = () => {
 
-    const admin = false;
+    const admin = true;
 
 
 
@@ -32,10 +31,7 @@ const Dashboard = () => {
 
                     {admin ||
                         <>
-                            <li className='mt-2'>
-                                
-                                <Link to="/dashboard/order"> <img src={cart} alt="" /> Order</Link>
-                            </li>
+                            
                             <li className='mt-2'>
                                 
                                 <Link to="/dashboard/orderList"> <img src={list} alt="" /> Order List</Link>

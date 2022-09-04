@@ -1,8 +1,5 @@
 import axios from 'axios';
 import  React, { useEffect, useState } from 'react';
-import service1 from '../../assets/images/icons/service1.png'
-import service2 from '../../assets/images/icons/service2.png'
-import service3 from '../../assets/images/icons/service3.png'
 import Service from './Service';
 
 const Services = () => {

@@ -10,7 +10,7 @@ const Navbar = () => {
         return <p>loading</p>
     }
 
-    const admin = false;
+    const admin = true;
 
     return (
         <div className="navbar bg-primary px-[135px]">
@@ -30,7 +30,7 @@ const Navbar = () => {
                 <ul className="menu menu-horizontal p-0">
                     <li><Link to='/'>Home</Link></li>
                     { admin ||
-                        <li><Link to='/dashboard/order'>Dashboard</Link></li>
+                        <li><Link to='/dashboard/orderList'>Dashboard</Link></li>
                     }
                     { admin &&
                         <li><Link to='/dashboard/serviceList'>Dashboard</Link></li>

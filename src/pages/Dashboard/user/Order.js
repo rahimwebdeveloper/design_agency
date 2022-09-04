@@ -1,20 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import icon from '../../../assets/images/upload.png'
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Order = () => {
+    const id = useParams();
+    const [service, setServices] = useState();
+    const navigate = useNavigate();
     const [user, loading] = useAuthState(auth);
-    const { register, handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const imageStorageKey = '599226558ac2fbf78c1da0a2dcb07de3';
 
-    if (loading) {
-        return <div>
-            <h1>this loading</h1>
-        </div>
-    }
-    const { displayName, photoURL } = user;
+    const { displayName, photoURL, email } = user;
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/service/${id.id}`)
+            .then(data => setServices(data))
+    }, [id])
+
 
     const onSubmit = async data => {
         const image = data.image[0];
@@ -28,25 +35,45 @@ const Order = () => {
         })
             .then(res => res.json())
             .then(result => {
-                const img = result.data.url ;
+                const img = result.data.url;
 
-                if(result.success){
+                if (result.success) {
                     const order = {
-                        companyName: data.name ,
-                        email : data.email ,
-                        service : data.service,
-                        details : data.details ,
-                        price : data.price ,
-                        img : img ,
+                        companyName: data.name,
+                        email: email,
+                        icon: service.data.image,
+                        service: service.data.title,
+                        details: data.details,
+                        price: data.price,
+                        img: img,
                     }
-                    
-                    
+                    fetch('http://localhost:5000/order', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(order),
+                    })
+                        .then(res => res.json())
+                        .then(res => {
+                            if (res.acknowledged) {
+                                reset();
+                                toast.success('Your Order Send Successfully. Pay Now ')
+                                navigate("/dashboard/orderList")
+                            }
+
+                        })
                 }
             })
 
     };
 
 
+    if (loading) {
+        return <div>
+            <h1>this loading</h1>
+        </div>
+    }
 
 
     return (
@@ -68,24 +95,91 @@ const Order = () => {
 
                 <form onSubmit={handleSubmit(onSubmit)} className="w-3/6">
 
-                    <input type="text" placeholder="Your name / company’s name" className="input mb-3 w-full text-sm font-bold rounded-none" {...register("name")} required />
-                    <input type="email" placeholder="Your email address" className="input mb-3 w-full text-sm font-bold rounded-none" {...register("email")} required />
-                    <select class=" select w-full font-bold rounded-none mb-3" {...register("service")}>
-                        <option selected>Graphic Design</option>
-                        <option>Web development</option>
-                        <option>Web & Mobile design</option>
-                    </select>
+                    <div className="form-control w-full">
+                        <input
+                            type="text"
+                            placeholder="Your name / company’s name"
+                            className="input mb-3 w-full text-sm font-bold rounded-none"
+                            {...register("name", {
+                                required: {
+                                    value: true,
+                                    message: 'Name is Required'
+                                }
+                            })}
+                        />
+                        <label className="label">
+                            {errors.name?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
+                        </label>
+                    </div>
 
-                    <textarea type="text" placeholder="Project Details" className="input mb-3 w-full h-28 text-sm font-bold rounded-none" {...register("details")} required />
+
+                    <input
+                        type="email"
+                        disabled
+                        value={email}
+                        className="input mb-3 w-full text-sm font-bold rounded-none"
+                    />
+                    <input
+                        type="service"
+                        disabled
+                        value={service?.data?.title}
+                        className="input mb-3 w-full text-sm font-bold rounded-none"
+                    />
+
+
+
+
+                    <div className="form-control w-full">
+                        <textarea
+                            type="text"
+                            placeholder="Project Details"
+                            className="input mb-3 w-full h-28 text-sm font-bold rounded-none"
+                            {...register("details", {
+                                required: {
+                                    value: true,
+                                    message: 'Project Details is Required'
+                                }
+                            })}
+                        />
+                        <label className="label">
+                            {errors.details?.type === 'required' && <span className="label-text-alt text-red-500">{errors.details.message}</span>}
+                        </label>
+                    </div>
+
+
                     <div className='flex justify-between'>
 
-                        <input type="number" placeholder="Your Price" className="input mb-3 rounded-none w-[49%]" {...register("price")} required />
+                        <div className="form-control  w-[49%]">
+                            <input
+                                type="number"
+                                placeholder="Your Price"
+                                className="input mb-3 rounded-none"
+                                {...register("price", {
+                                    required: {
+                                        value: true,
+                                        message: 'Project Details is Required'
+                                    }
+                                })}
+                            />
+                            <label className="label">
+                                {errors.price?.type === 'required' && <span className="label-text-alt text-red-500">{errors.price.message}</span>}
+                            </label>
+                        </div>
+
 
                         <div className='btn normal-case text-sm font-bold bg-[#DEFFED] text-[#009444] border-0 hover:bg-[#DEFFED] w-[49%]  '>
-                            <input id='file' type="file" className='hidden' {...register("image")} />
+                            <input id='file' type="file" className='hidden' {...register("image", {
+                                required: {
+                                    value: true,
+                                    message: 'Image is Required'
+                                }
+                            })} />
                             <label htmlFor='file' className='flex justify-between'>
                                 <img className='h-6 w-6 mr-2' src={icon} alt="" />
                                 Upload project file
+                            </label>
+                            <label className="label">
+                                {errors.image?.type === 'required' && <span className="label-text-alt text-red-500">{errors.image.message}</span>}
                             </label>
                         </div>
                     </div>

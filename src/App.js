@@ -4,6 +4,8 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import { adminRouter } from './router/adminRouter';
 import { userRouter } from './router/userRouter';
 import PrivateRouters from './authentication/PrivateRouters';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
         </Route>
 
       </Routes>
+      <ToastContainer/>
     </div>
   );
 }
