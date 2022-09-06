@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import icon from '../../../assets/images/upload.png'
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
 
 const Order = () => {
-    const id = useParams();
-    const [service, setServices] = useState();
+    const {id} = useParams();
     const navigate = useNavigate();
     const [user, loading] = useAuthState(auth);
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
@@ -17,10 +16,13 @@ const Order = () => {
 
     const { displayName, photoURL, email } = user;
 
-    useEffect(() => {
-        axios.get(`http://localhost:5000/service/${id.id}`)
-            .then(data => setServices(data))
-    }, [id])
+    const { data: service, isLoading } = useQuery('service',
+        () => fetch(`http://localhost:5000/service/${id}`)
+            .then(res => res.json()))
+
+    if (isLoading) {
+        return <p>data in loading </p>
+    }
 
 
     const onSubmit = async data => {
@@ -41,8 +43,8 @@ const Order = () => {
                     const order = {
                         companyName: data.name,
                         email: email,
-                        icon: service.data.image,
-                        service: service.data.title,
+                        icon: service.image,
+                        service: service.title,
                         details: data.details,
                         price: data.price,
                         img: img,
@@ -68,6 +70,7 @@ const Order = () => {
 
     };
 
+    console.log(service)
 
     if (loading) {
         return <div>
@@ -122,7 +125,7 @@ const Order = () => {
                     <input
                         type="service"
                         disabled
-                        value={service?.data?.title}
+                        value={service?.title}
                         className="input mb-3 w-full text-sm font-bold rounded-none"
                     />
 
@@ -133,7 +136,7 @@ const Order = () => {
                         <textarea
                             type="text"
                             placeholder="Project Details"
-                            className="input mb-3 w-full h-28 text-sm font-bold rounded-none"
+                            className="input w-full h-28  text-sm font-bold rounded-none"
                             {...register("details", {
                                 required: {
                                     value: true,
@@ -184,7 +187,7 @@ const Order = () => {
                         </div>
                     </div>
 
-                    <input className='btn btn-sm mt-2 w-2/12 rounded-none normal-case' type="submit" value="Send" />
+                    <input className='btn btn-sm w-2/12 rounded-none normal-case' type="submit" value="Send" />
 
                 </form>
 

@@ -1,33 +1,28 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useQuery } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 
 const OrderList = () => {
-
+    const navigate = useNavigate(); 
     const [user, loading] = useAuthState(auth);
-    const [orders, setOrders] = useState([])
-
-
     const { displayName, photoURL, email } = user;
 
-    useEffect(() => {
-        axios.get(`http://localhost:5000/order?email=${email}`)
-            .then(data => {
-                console.log(data)
-                setOrders(data.data)
-            })
-    }, [email])
+    const { data: orders, isLoading } = useQuery('orders', () => fetch(`http://localhost:5000/order?email=${email}`).then(res => res.json()))
 
-    console.log(orders)
+    const payNow = id => {
+        navigate(`/dashboard/pay/${id}`)
+    }
+
+    if(isLoading){
+        return <p> data is loading</p>
+    }
 
     if (loading) {
         return <div>
             <h1>this loading</h1>
         </div>
     }
-    let position = 'done';
-
     return (
         <div>
             <div className='bg-white flex items-center justify-between py-2 px-12'>
@@ -44,7 +39,7 @@ const OrderList = () => {
             <div className='grid lg:grid-cols-3 gap-20 m-10'>
 
                 {
-                    orders.map(({pay, price, icon, details, service, _id, }) =>
+                    orders.map(({pay, position, price, icon, details, service, _id, }) =>
                         <div key={_id} className="card shadow-2xl">
                             <div className={`flex ${pay === true ? "justify-between" : "justify-center"} items-center p-5`}>
                                 <img className='h-24 w-24' src={icon} alt="logo" />
@@ -62,12 +57,12 @@ const OrderList = () => {
                             <div className="card-body pt-0 items-center text-center">
                                 <h2 className="card-title">{service}</h2>
                                 <h3>Price: ${price}</h3>
-                                <p>{details}</p>
+                                <p>{details}d</p>
 
                                 {pay ||
                                     <div>
                                         <button className='btn btn-sm border-none hover:bg-red-700 mr-2 bg-red-600'>Delete</button>
-                                        <button className='btn btn-sm'>Pay Naw</button>
+                                        <button onClick={() => payNow(_id)} className='btn btn-sm'>Pay Naw</button>
                                     </div>
                                 }
 

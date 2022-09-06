@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import logo from '../../assets/images/logos/logo.png'
 import addAdmin from '../../assets/images/addAdmin.svg' ;
 import plus from '../../assets/images/plus.svg' ;
@@ -7,10 +7,13 @@ import list  from '../../assets/images/serviceList.svg';
 import review from '../../assets/images/review.svg';
 
 const Dashboard = () => {
+    // const {pathname} = useLocation();
 
     const admin = true;
 
-
+//  if(pathname.includes('dashboard/serviceList')){
+//     console.log(pathname)
+//  }
 
 
     return (
