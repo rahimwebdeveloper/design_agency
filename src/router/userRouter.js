@@ -1,7 +1,7 @@
 import Order from "../pages/Dashboard/user/Order";
 import OrderList from "../pages/Dashboard/user/OrderList";
-import Pay from "../pages/Dashboard/user/Pay";
 import Review from "../pages/Dashboard/user/Review";
+import Pay from "../pages/Payment/Pay";
 
 export const userRouter = [
     {path:"order/:id", name:"Order" , Component: Order},
