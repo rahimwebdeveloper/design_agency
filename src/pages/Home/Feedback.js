@@ -5,11 +5,11 @@ import customer3 from '../../assets/images/customer-3.png'
 
 const Feedback = () => {
     return (
-        <div className='mt-20 lg:mx-[135px] mb-20'>
+        <div className='mt-20 mx-10 lg:mx-[135px] mb-20'>
             <h1 className='text-center font-bold text-4xl'>Clients <span className='text-accent'>Feedback</span></h1>
-            <div className='mt-24 grid grid-cols-3 gap-10'>
+            <div className='mt-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 '>
 
-                <div className='w-[350px] h-[212px] p-5 border'>
+                <div className='lg:w-[350px] lg:h-[212px] p-5 border'>
                     <div className='flex items-center mb-3'>
                         <div className='mr-3'>
                             <img className='w-16' src={customer1} alt="" />
@@ -24,7 +24,7 @@ const Feedback = () => {
                     </p>
                 </div>
                 {/* customer2 */}
-                <div className='w-[350px] h-[212px] p-5 border'>
+                <div className='lg:w-[350px] lg:h-[212px] p-5 border'>
                     <div className='flex items-center mb-3'>
                         <div className='mr-3'>
                             <img className='w-16' src={customer2} alt="" />
@@ -39,7 +39,7 @@ const Feedback = () => {
                     </p>
                 </div>
                 {/* customer3 */}
-                <div className='w-[350px] h-[212px] p-5 border'>
+                <div className='lg:w-[350px] lg:h-[212px] p-5 border'>
                     <div className='flex items-center mb-3'>
                         <div className='mr-3'>
                             <img className='w-16' src={customer3} alt="" />

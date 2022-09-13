@@ -14,7 +14,7 @@ const Review = () => {
 
     return (
         <div>
-            <div className='bg-white flex items-center justify-between py-2 px-12'>
+            <div className='bg-white lg:flex items-center justify-between py-2 px-12 hidden lg:block'>
                 <h1 className='text-2xl font-bold'> Review </h1>
                 <div className='flex items-center'>
                     <div className="avatar">
@@ -27,7 +27,7 @@ const Review = () => {
             </div>
 
             <div className='p-10'>
-                <form className='w-3/6'>
+                <form className='lg:w-3/6 w-5/6'>
                     <input type="text" placeholder="Your name" className="input mb-3 w-full rounded-none" />
                     <input type="text" placeholder="Company’s name, Designation" className="input mb-3 w-full rounded-none" />
                    

@@ -1,11 +1,11 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import auth from '../../../firebase.init';
-import icon from '../../../assets/images/upload.png'
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
-import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import icon from '../../../assets/images/upload.png';
+import auth from '../../../firebase.init';
 
 const Order = () => {
     const {id} = useParams();
@@ -17,7 +17,7 @@ const Order = () => {
     const { displayName, photoURL, email } = user;
 
     const { data: service, isLoading } = useQuery('service',
-        () => fetch(`http://localhost:5000/service/${id}`)
+        () => fetch(`https://young-coast-42098.herokuapp.com/service/${id}`)
             .then(res => res.json()))
 
     if (isLoading) {
@@ -49,7 +49,7 @@ const Order = () => {
                         price: data.price,
                         img: img,
                     }
-                    fetch('http://localhost:5000/order', {
+                    fetch('https://young-coast-42098.herokuapp.com/order', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'
@@ -82,7 +82,7 @@ const Order = () => {
     return (
         <div>
 
-            <div className='bg-white flex items-center justify-between py-2 px-12'>
+            <div className='bg-white lg:flex items-center justify-between py-2 px-12 hidden lg:block'>
                 <h1 className='text-2xl font-bold'> Order</h1>
                 <div className='flex items-center'>
                     <div className="avatar">

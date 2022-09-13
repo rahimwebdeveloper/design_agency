@@ -9,7 +9,7 @@ const ServiceList = () => {
     const { displayName, photoURL } = user;
 
 
-    const { data: serviceList, isLoading, refetch } = useQuery('serviceList', () => fetch("http://localhost:5000/orders").then(res => res.json()))
+    const { data: serviceList, isLoading, refetch } = useQuery('serviceList', () => fetch("https://young-coast-42098.herokuapp.com/orders").then(res => res.json()))
 
 
     if (loading || isLoading) {
@@ -21,7 +21,7 @@ const ServiceList = () => {
     return (
         <div>
 
-            <div className='bg-white flex items-center justify-between py-2 px-12'>
+            <div className='bg-white lg:flex items-center justify-between py-2 px-12 hidden lg:block'>
                 <h1 className='text-2xl font-bold'> Service List</h1>
                 <div className='flex items-center'>
                     <div className="avatar">

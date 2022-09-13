@@ -6,6 +6,7 @@ import { userRouter } from './router/userRouter';
 import PrivateRouters from './authentication/PrivateRouters';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AdminRouters from './authentication/AdminRouters';
 
 function App() {
   return (
@@ -16,12 +17,12 @@ function App() {
             <Route key={index} path={path} element={<Component />} />
           )
         }
-        <Route element={ <PrivateRouters/>   } >
+        <Route element={<PrivateRouters />} >
           <Route path='/dashboard' element={<Dashboard />}>
             {
               userRouter.map(({ path, Component }, index) => <Route key={index} path={path} element={<Component />} />)
             }
-            <Route>
+            <Route element={<AdminRouters />}>
               {
                 adminRouter.map(({ path, Component }, index) => <Route key={index} path={path} element={<Component />} />)
               }
@@ -31,7 +32,7 @@ function App() {
         </Route>
 
       </Routes>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 }

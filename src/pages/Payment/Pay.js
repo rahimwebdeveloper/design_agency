@@ -1,6 +1,6 @@
-import React from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import CheckoutForm from './CheckoutForm';
@@ -9,7 +9,7 @@ const stripePromise = loadStripe('pk_test_51L44DAFgaYc598OmubgAtDM7g7gzf7PY7zl11
 const Pay = () => {
     const { id } = useParams();
 
-    const { data: order, isLoading } = useQuery('pay', () => fetch(`http://localhost:5000/order/${id}`).then(res => res.json()))
+    const { data: order, isLoading } = useQuery('pay', () => fetch(`https://young-coast-42098.herokuapp.com/order/${id}`).then(res => res.json()))
 
     if (isLoading) {
         return <p> is loading</p>

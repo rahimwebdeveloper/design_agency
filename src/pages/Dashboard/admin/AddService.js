@@ -3,14 +3,54 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import icon from '../../../assets/images/upload.png'
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const AddService = () => {
-    const { register, formState: { errors }, handleSubmit, reset } = useForm();
+    const { register, handleSubmit, reset } = useForm();
     const [user, loading] = useAuthState(auth);
     const { displayName, photoURL } = user;
+    const navigate = useNavigate();
+    const imageStorageKey = 'e768a17919a764104981409d61a9068b';
 
-    const onSubmit = async data => { 
-        console.log(data)
+    const onSubmit = async data => {
+        const image = data.image[0];
+        const formData = new FormData();
+        formData.append('image', image);
+        const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`
+
+        fetch(url, {
+            method: 'POST',
+            body: formData,
+        })
+            .then(res => res.json())
+            .then(result => {
+                const img = result.data.url;
+                if (result.success) {
+                    const service = {
+                        title: data.title,
+                        descriptions: data.designation,
+                        image: img,
+                    }
+                    fetch('http://localhost:5000/service', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(service),
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.acknowledged) {
+                                reset();
+                                navigate('/')
+                                toast.success('Your Product Add Success full')
+
+                            }
+                            console.log(data)
+                        })
+                }
+            })
     }
 
     if (loading) {
@@ -22,7 +62,7 @@ const AddService = () => {
     return (
         <div>
 
-            <div className='bg-white flex items-center justify-between py-2 px-12'>
+            <div className='bg-white lg:flex items-center justify-between py-2 px-12 hidden lg:block'>
                 <h1 className='text-2xl font-bold'> Add Service </h1>
                 <div className='flex items-center'>
                     <div className="avatar">
@@ -35,7 +75,7 @@ const AddService = () => {
             </div>
 
             <div className='m-10'>
-            <form onSubmit={handleSubmit(onSubmit)} className="w-5/6">
+                <form onSubmit={handleSubmit(onSubmit)} className="w-5/6">
 
                     <div className='flex bg-white p-5'>
                         <div className='w-6/12'>
@@ -43,7 +83,7 @@ const AddService = () => {
                                 <label class="label">
                                     <span class="label-text text-base font-bold"> Service Tittle</span>
                                 </label>
-                                <input type="text"  placeholder="Enter Title" class="input input-bordered w-full" {...register("title")} />
+                                <input type="text" placeholder="Enter Title" class="input input-bordered w-full" {...register("title")} />
                             </div>
                             <div class="form-control mt-3">
                                 <label class="label">
