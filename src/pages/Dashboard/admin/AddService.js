@@ -47,7 +47,6 @@ const AddService = () => {
                                 toast.success('Your Product Add Success full')
 
                             }
-                            console.log(data)
                         })
                 }
             })

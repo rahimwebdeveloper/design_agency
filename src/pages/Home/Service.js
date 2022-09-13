@@ -17,7 +17,7 @@ const Service = ({ service }) => {
             <div className="card-body items-center text-center">
                 <h2 className="card-title">{title}</h2>
                 <p>{descriptions}</p>
-                <button onClick={() => buyNaw(_id)} className='btn btn-sm'> Boy Now</button>
+                <button onClick={() => buyNaw(_id)} className='btn btn-sm'>Parches</button>
             </div>
         </div>
     );
