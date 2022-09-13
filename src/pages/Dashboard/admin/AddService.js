@@ -1,10 +1,10 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import auth from '../../../firebase.init';
-import icon from '../../../assets/images/upload.png'
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import icon from '../../../assets/images/upload.png';
+import auth from '../../../firebase.init';
 import Loading from '../../../Shared/Loading';
 
 const AddService = () => {
@@ -33,7 +33,7 @@ const AddService = () => {
                         descriptions: data.designation,
                         image: img,
                     }
-                    fetch('http://localhost:5000/service', {
+                    fetch('https://young-coast-42098.herokuapp.com/service', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'

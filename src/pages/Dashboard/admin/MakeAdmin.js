@@ -1,5 +1,4 @@
-import React from 'react';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
@@ -18,7 +17,7 @@ const MakeAdmin = () => {
             email,
         }
 
-        fetch('http://localhost:5000/user', {
+        fetch('https://young-coast-42098.herokuapp.com/user', {
             method: "POST",
             headers: {
                 'content-type': 'application/json',
