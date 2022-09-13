@@ -2,6 +2,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
+import Loading from '../../../Shared/Loading';
 
 const OrderList = () => {
     const navigate = useNavigate(); 
@@ -14,14 +15,10 @@ const OrderList = () => {
         navigate(`/dashboard/pay/${id}`)
     }
 
-    if(isLoading){
-        return <p> data is loading</p>
-    }
+  
 
-    if (loading) {
-        return <div>
-            <h1>this loading</h1>
-        </div>
+    if (loading || isLoading) {
+        return <Loading />
     }
     return (
         <div>

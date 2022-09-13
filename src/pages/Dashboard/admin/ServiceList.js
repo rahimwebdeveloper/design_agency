@@ -2,6 +2,7 @@ import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import auth from '../../../firebase.init';
+import Loading from '../../../Shared/Loading';
 import Service from './Service';
 
 const ServiceList = () => {
@@ -13,9 +14,7 @@ const ServiceList = () => {
 
 
     if (loading || isLoading) {
-        return <div>
-            <h1>this loading</h1>
-        </div>
+        return <Loading />
     }
 
     return (

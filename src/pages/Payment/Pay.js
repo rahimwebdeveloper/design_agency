@@ -3,6 +3,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
+import Loading from '../../Shared/Loading';
 import CheckoutForm from './CheckoutForm';
 
 const stripePromise = loadStripe('pk_test_51L44DAFgaYc598OmubgAtDM7g7gzf7PY7zl11hA2Xkt2kKrZD6HVUyB6qnP4tiyGKS9BXkIQD8WHY98TgyXY7WwX00cLtk7Rxu');
@@ -12,7 +13,7 @@ const Pay = () => {
     const { data: order, isLoading } = useQuery('pay', () => fetch(`https://young-coast-42098.herokuapp.com/order/${id}`).then(res => res.json()))
 
     if (isLoading) {
-        return <p> is loading</p>
+        return <Loading />
     }
 
     const { companyName, service, price, icon } = order;

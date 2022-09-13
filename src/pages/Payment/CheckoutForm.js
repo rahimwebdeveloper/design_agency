@@ -1,5 +1,6 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
+import Loading from '../../Shared/Loading';
 
 
 const CheckoutForm = ({ order }) => {
@@ -7,7 +8,7 @@ const CheckoutForm = ({ order }) => {
     const elements = useElements();
     const [cardError, setCardError] = useState('')
     const [success, setSuccess] = useState('')
-    const [prosessing, setProcessing] = useState('')
+    const [processing, setProcessing] = useState('')
     const [clientSecret, setClientSecret] = useState('')
     const [transactionID, setTransactionID] = useState('')
 
@@ -96,6 +97,7 @@ const CheckoutForm = ({ order }) => {
         }
 
     }
+
 
     return (
         <>

@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
+import Loading from '../../../Shared/Loading';
 
 const MakeAdmin = () => {
     const [user, loading] = useAuthState(auth);
@@ -39,9 +40,7 @@ const MakeAdmin = () => {
     }
 
     if (loading) {
-        return <div>
-            <h1>this loading</h1>
-        </div>
+        return <Loading />
     }
 
     return (

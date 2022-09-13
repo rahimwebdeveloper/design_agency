@@ -4,6 +4,7 @@ import logo from '../../assets/images/logos/logo.png';
 import google from '../../assets/images/google.png';
 import auth from '../../firebase.init';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth'
+import Loading from '../../Shared/Loading';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -13,11 +14,11 @@ const Login = () => {
 
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
 
-    if(loading){
-        return <p> this loading this page</p>
+    if (loading ) {
+        return <Loading />
     }
 
-    if(user){
+    if (user) {
         navigate(from, { replace: true });
     }
 

@@ -9,15 +9,15 @@ import Navbar from './Navbar';
 const Home = () => {
 
     return (
-        <div>
+        <>
             <Navbar />
             <TopBanner />
-            <Services />
+            <Services home={true} size={3}  />
             <Profile />
-            <Feedback />
+            <Feedback home={true} size={3} />
             <Footer />
 
-        </div>
+        </>
     );
 };
 

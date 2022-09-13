@@ -1,16 +1,49 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
+import Loading from '../../../Shared/Loading';
 
 const Review = () => {
     const [user, loading] = useAuthState(auth);
 
     if (loading) {
-        return <div>
-            <h1>this loading</h1>
-        </div>
+        return <Loading />
     }
     const { displayName, photoURL } = user;
+
+    const handleSubmit = event => {
+        event.preventDefault();
+        const name = event.target.name.value ;
+        const position = event.target.companyName.value ;
+        const review = event.target.review.value ;
+
+        const feedback= {
+            image: photoURL,
+            name: name,
+            position: position,
+            review: review,
+        }
+
+        fetch('http://localhost:5000/review', {
+            method: 'POST',
+            headers: {
+                'content-type': 'applications/json'
+            },
+            body: JSON.stringify(feedback),
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            if(data.acknowledged){
+                event.reset();
+                toast.success('Your Review Add Success Full')
+            }
+        })
+
+
+    }
+
 
     return (
         <div>
@@ -27,12 +60,12 @@ const Review = () => {
             </div>
 
             <div className='p-10'>
-                <form className='lg:w-3/6 w-5/6'>
-                    <input type="text" placeholder="Your name" className="input mb-3 w-full rounded-none" />
-                    <input type="text" placeholder="Company’s name, Designation" className="input mb-3 w-full rounded-none" />
-                   
-                    <textarea type="text" placeholder="Description" className="input mb-3 w-full h-28 rounded-none" />
-                   
+                <form onSubmit={handleSubmit} className='lg:w-3/6 w-5/6'>
+                    <input type="text" name='name' placeholder="Your name" className="input mb-3 w-full rounded-none" />
+                    <input type="text" name='companyName' placeholder="Company’s name, Designation" className="input mb-3 w-full rounded-none" />
+
+                    <textarea type="text" name='review' placeholder="Description" className="input mb-3 w-full h-28 rounded-none" />
+
                     <input className='btn btn-sm mt-2 w-2/12 rounded-none normal-case' type="button" value="Submit" />
 
                 </form>

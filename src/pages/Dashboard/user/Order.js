@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import icon from '../../../assets/images/upload.png';
 import auth from '../../../firebase.init';
+import Loading from '../../../Shared/Loading';
 
 const Order = () => {
     const {id} = useParams();
@@ -21,7 +22,7 @@ const Order = () => {
             .then(res => res.json()))
 
     if (isLoading) {
-        return <p>data in loading </p>
+        return < Loading />
     }
 
 

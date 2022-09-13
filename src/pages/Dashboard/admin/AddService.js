@@ -5,6 +5,7 @@ import icon from '../../../assets/images/upload.png'
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Loading from '../../../Shared/Loading';
 
 const AddService = () => {
     const { register, handleSubmit, reset } = useForm();
@@ -53,9 +54,7 @@ const AddService = () => {
     }
 
     if (loading) {
-        return <div>
-            <h1>this loading</h1>
-        </div>
+        return <Loading />
     }
 
     return (
