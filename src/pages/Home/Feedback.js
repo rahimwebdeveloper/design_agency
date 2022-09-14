@@ -1,45 +1,53 @@
 import React from 'react';
+import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import customer1 from '../../assets/images/customer-1.png'
 import customer2 from '../../assets/images/customer-2.png'
 import customer3 from '../../assets/images/customer-3.png'
+import Loading from '../../Shared/Loading';
 import Footer from './Footer';
 import Navbar from './Navbar';
 
 const Feedback = ({ home, size }) => {
 
-    const feedback = [
-        {
-            image: customer1,
-            name: 'Nash Patrik',
-            position: 'CEO, Manpol',
-            review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus commodo ipsum duis laoreet maecenas. Feugiat',
-        },
-        {
-            image: customer2,
-            name: 'Nash Patrik',
-            position: 'CEO, Manpol',
-            review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus commodo ipsum duis laoreet maecenas. Feugiat',
-        },
-        {
-            image: customer3,
-            name: 'Nash Patrik',
-            position: 'CEO, Manpol',
-            review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus commodo ipsum duis laoreet maecenas. Feugiat',
-        },
-        {
-            image: customer2,
-            name: 'Nash Patrik',
-            position: 'CEO, Manpol',
-            review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus commodo ipsum duis laoreet maecenas. Feugiat',
-        },
-        {
-            image: customer3,
-            name: 'Nash Patrik',
-            position: 'CEO, Manpol',
-            review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus commodo ipsum duis laoreet maecenas. Feugiat',
-        }
-    ]
+    const { data: feedback, isLoading } = useQuery('review', () => fetch('http://localhost:5000/review').then(res => res.json()))
+
+    if (isLoading ) {
+      return <Loading />
+    }
+
+    // const feedback = [
+    //     {
+    //         image: customer1,
+    //         name: 'Nash Patrik',
+    //         position: 'CEO, Manpol',
+    //         review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus commodo ipsum duis laoreet maecenas. Feugiat',
+    //     },
+    //     {
+    //         image: customer2,
+    //         name: 'Nash Patrik',
+    //         position: 'CEO, Manpol',
+    //         review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus commodo ipsum duis laoreet maecenas. Feugiat',
+    //     },
+    //     {
+    //         image: customer3,
+    //         name: 'Nash Patrik',
+    //         position: 'CEO, Manpol',
+    //         review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus commodo ipsum duis laoreet maecenas. Feugiat',
+    //     },
+    //     {
+    //         image: customer2,
+    //         name: 'Nash Patrik',
+    //         position: 'CEO, Manpol',
+    //         review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus commodo ipsum duis laoreet maecenas. Feugiat',
+    //     },
+    //     {
+    //         image: customer3,
+    //         name: 'Nash Patrik',
+    //         position: 'CEO, Manpol',
+    //         review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus commodo ipsum duis laoreet maecenas. Feugiat',
+    //     }
+    // ]
     return (
         <>
             {

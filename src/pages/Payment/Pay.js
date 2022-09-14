@@ -10,7 +10,7 @@ const stripePromise = loadStripe('pk_test_51L44DAFgaYc598OmubgAtDM7g7gzf7PY7zl11
 const Pay = () => {
     const { id } = useParams();
 
-    const { data: order, isLoading } = useQuery('pay', () => fetch(`https://young-coast-42098.herokuapp.com/order/${id}`).then(res => res.json()))
+    const { data: order, isLoading } = useQuery('pay', () => fetch(`http://localhost:5000/order/${id}`).then(res => res.json()))
 
     if (isLoading) {
         return <Loading />

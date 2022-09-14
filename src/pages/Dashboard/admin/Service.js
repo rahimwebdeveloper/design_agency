@@ -9,7 +9,7 @@ const Service = ({ services, index, refetch }) => {
 
         const value = selectRef.current.value;
         setSate(value);
-        fetch(`https://young-coast-42098.herokuapp.com/order/${id}?position=${value}`, {
+        fetch(`http://localhost:5000/order/${id}?position=${value}`, {
             method: 'PUT',
         })
             .then(res => res.json)
@@ -31,7 +31,7 @@ const Service = ({ services, index, refetch }) => {
                 <td>{companyName}</td>
                 <td>{email}</td>
                 <td>{service}</td>
-                <td>{details}</td>
+                <td>{details.slice(0, 30)}</td>
                 {pay ?
                     <td  className='p-0 w-full'>
                         <select className='bg-neutral text-white font-bold p-1' value={state} onChange={() => changeStatus(_id)} ref={selectRef}>

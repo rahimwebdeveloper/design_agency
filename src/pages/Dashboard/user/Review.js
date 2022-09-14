@@ -14,32 +14,32 @@ const Review = () => {
 
     const handleSubmit = event => {
         event.preventDefault();
-        const name = event.target.name.value ;
-        const position = event.target.companyName.value ;
-        const review = event.target.review.value ;
+        const name = event.target.name.value;
+        const position = event.target.companyName.value;
+        const review = event.target.review.value;
 
-        const feedback= {
+        const feedback = {
             image: photoURL,
             name: name,
             position: position,
             review: review,
         }
-
-        fetch('https://young-coast-42098.herokuapp.com/review', {
+        console.log(feedback)
+        fetch('http://localhost:5000/review', {
             method: 'POST',
             headers: {
-                'content-type': 'applications/json'
+                'content-type': 'application/json'
             },
             body: JSON.stringify(feedback),
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            if(data.acknowledged){
-                event.reset();
-                toast.success('Your Review Add Success Full')
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.acknowledged) {
+                    toast.success('Your Review Add Success Full')
+                    event.target.reset();
+                }
+            })
 
 
     }
@@ -66,7 +66,7 @@ const Review = () => {
 
                     <textarea type="text" name='review' placeholder="Description" className="input mb-3 w-full h-28 rounded-none" />
 
-                    <input className='btn btn-sm mt-2 w-2/12 rounded-none normal-case' type="button" value="Submit" />
+                    <input className='btn btn-sm mt-2 w-2/12 rounded-none normal-case' type="submit" value="Submit" />
 
                 </form>
             </div>

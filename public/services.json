@@ -19,7 +19,34 @@
 
 
 [
- {
-    "image": ""
- }
+    {
+        "image": customer1,
+        "name": 'Nash Patrik',
+        "position": 'CEO, Manpol',
+        "review": 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus commodo ipsum duis laoreet "maecenas". Feugiat',
+    },
+    {
+        image: customer2,
+        name: 'Nash Patrik',
+        position: 'CEO, Manpol',
+        review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus commodo ipsum duis laoreet maecenas. Feugiat',
+    },
+    {
+        image: customer3,
+        name: 'Nash Patrik',
+        position: 'CEO, Manpol',
+        review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus commodo ipsum duis laoreet maecenas. Feugiat',
+    },
+    {
+        image: customer2,
+        name: 'Nash Patrik',
+        position: 'CEO, Manpol',
+        review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus commodo ipsum duis laoreet maecenas. Feugiat',
+    },
+    {
+        image: customer3,
+        name: 'Nash Patrik',
+        position: 'CEO, Manpol',
+        review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus commodo ipsum duis laoreet maecenas. Feugiat',
+    }
 ]
