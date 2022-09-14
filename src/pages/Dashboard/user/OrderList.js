@@ -9,7 +9,7 @@ const OrderList = () => {
     const [user, loading] = useAuthState(auth);
     const { displayName, photoURL, email } = user;
 
-    const { data: orders, isLoading } = useQuery('orders', () => fetch(`http://localhost:5000/order?email=${email}`).then(res => res.json()))
+    const { data: orders, isLoading } = useQuery('orders', () => fetch(`https://young-coast-42098.herokuapp.com/order?email=${email}`).then(res => res.json()))
 
     const payNow = id => {
         navigate(`/dashboard/pay/${id}`)

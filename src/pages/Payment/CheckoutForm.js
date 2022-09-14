@@ -15,7 +15,7 @@ const CheckoutForm = ({ order }) => {
     const { price, companyName, email, _id, service } = order;
 
     useEffect(() => {
-        fetch('http://localhost:5000/create_payment_intent', {
+        fetch('https://young-coast-42098.herokuapp.com/create_payment_intent', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -81,7 +81,7 @@ const CheckoutForm = ({ order }) => {
 
             }
             
-            fetch(`http://localhost:5000/order/${_id}`, {
+            fetch(`https://young-coast-42098.herokuapp.com/order/${_id}`, {
                 method: 'PATCH',
                 headers: {
                     'content-type': 'application/json'

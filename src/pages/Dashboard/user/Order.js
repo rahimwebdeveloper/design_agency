@@ -18,7 +18,7 @@ const Order = () => {
     const { displayName, photoURL, email } = user;
 
     const { data: service, isLoading } = useQuery('service',
-        () => fetch(`http://localhost:5000/service/${id}`)
+        () => fetch(`https://young-coast-42098.herokuapp.com/service/${id}`)
             .then(res => res.json()))
 
     if (isLoading) {
@@ -50,7 +50,7 @@ const Order = () => {
                         price: data.price,
                         img: img,
                     }
-                    fetch('http://localhost:5000/order', {
+                    fetch('https://young-coast-42098.herokuapp.com/order', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'

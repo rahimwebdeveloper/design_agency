@@ -7,7 +7,7 @@ import Service from './Service';
 
 const Services = ({ home, size }) => {
 
-  const { data: services, isLoading } = useQuery('users', () => fetch('http://localhost:5000/service').then(res => res.json()))
+  const { data: services, isLoading } = useQuery('users', () => fetch('https://young-coast-42098.herokuapp.com/service').then(res => res.json()))
 
   if (isLoading ) {
     return <Loading />
