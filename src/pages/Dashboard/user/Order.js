@@ -71,8 +71,6 @@ const Order = () => {
 
     };
 
-    console.log(service)
-
     if (loading) {
         return <div>
             <h1>this loading</h1>

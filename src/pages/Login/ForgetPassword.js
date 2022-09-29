@@ -31,7 +31,6 @@ const ForgetPassword = () => {
     }
 
     if (error?.message === 'Firebase: Error (auth/user-not-found).') {
-        console.log('user not found');
         errorMessage = 'User Not Found'
     }
 

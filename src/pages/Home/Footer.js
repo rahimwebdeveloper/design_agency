@@ -5,7 +5,6 @@ const Footer = () => {
 
     const handleSubmit = event => {
         event.preventDefault();
-        console.log('event done')
         event.target.reset();
         toast.success("Your message Send")
     }

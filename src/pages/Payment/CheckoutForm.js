@@ -1,13 +1,16 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Loading from '../../Shared/Loading';
 
 
 const CheckoutForm = ({ order }) => {
+    const navigate = useNavigate();
     const stripe = useStripe();
     const elements = useElements();
     const [cardError, setCardError] = useState('')
     const [success, setSuccess] = useState('')
-    const [processing, setProcessing] = useState('')
+    const [processing, setProcessing] = useState(false)
     const [clientSecret, setClientSecret] = useState('')
     const [transactionID, setTransactionID] = useState('')
 
@@ -74,13 +77,12 @@ const CheckoutForm = ({ order }) => {
             setSuccess('Congrats ! your payment is completed')
 
             // backend update
-            const payment= {
-                order: _id ,
+            const payment = {
+                order: _id,
                 name: service,
-                transactionID: paymentIntent.id , 
+                transactionID: paymentIntent.id,
 
             }
-            
             fetch(`https://young-coast-42098.herokuapp.com/order/${_id}`, {
                 method: 'PATCH',
                 headers: {
@@ -88,13 +90,17 @@ const CheckoutForm = ({ order }) => {
                 },
                 body: JSON.stringify(payment)
             }).then(res => res.json())
-            .then(data => {
-                console.log(data)
-                setProcessing(false)
-            })
+                .then(data => {
+                    setProcessing(false)
+                    navigate("/dashboard/orderList")
+
+                })
 
         }
 
+    }
+    if (processing) {
+        <Loading />
     }
 
 
@@ -125,8 +131,8 @@ const CheckoutForm = ({ order }) => {
                 }
                 {
                     success && <>
-                    <p className='text-green-500 text-center mt-3 '>{success}</p>
-                    <p>Your Transaction ID <span className='text-orange-500'>{transactionID}</span></p>
+                        <p className='text-green-500 text-center mt-3 '>{success}</p>
+                        <p>Your Transaction ID <span className='text-orange-500'>{transactionID}</span></p>
                     </>
                 }
             </form>

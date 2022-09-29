@@ -8,8 +8,7 @@ import Service from './Service';
 const ServiceList = () => {
     const [user, loading] = useAuthState(auth);
     const { displayName, photoURL } = user;
-
-
+    
     const { data: serviceList, isLoading, refetch } = useQuery('serviceList', () => fetch("https://young-coast-42098.herokuapp.com/orders").then(res => res.json()))
 
 
@@ -46,11 +45,11 @@ const ServiceList = () => {
                         </thead>
                         <tbody>
                             {
-                                serviceList.map( (services, index) => <Service
-                                key={services._id}
-                                services={services}
-                                index={index}
-                                refetch={refetch}
+                                serviceList.map((services, index) => <Service
+                                    key={services._id}
+                                    services={services}
+                                    index={index}
+                                    refetch={refetch}
                                 ></Service>)
                             }
                         </tbody>

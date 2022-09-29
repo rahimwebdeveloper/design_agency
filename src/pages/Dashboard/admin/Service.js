@@ -15,8 +15,6 @@ const Service = ({ services, index, refetch }) => {
             .then(res => res.json)
             .then(data => {
                 console.log(data)
-
-
             })
 
     }

@@ -24,7 +24,6 @@ const Review = () => {
             position: position,
             review: review,
         }
-        console.log(feedback)
         fetch('https://young-coast-42098.herokuapp.com/review', {
             method: 'POST',
             headers: {
@@ -34,7 +33,6 @@ const Review = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 if (data.acknowledged) {
                     toast.success('Your Review Add Success Full')
                     event.target.reset();

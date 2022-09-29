@@ -5,19 +5,14 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logos/logo.png';
 import auth from '../../firebase.init';
 import useAdmin from '../../hooks/useAdmin';
-import Loading from '../../Shared/Loading';
 
 const Navbar = () => {
-    const [user, loading] = useAuthState(auth);
+    const [user] = useAuthState(auth);
     const [admin] = useAdmin(user)
 
-    if (loading) {
-        return <Loading/>
-    }
 
     const handleLogOut = () => {
         signOut(auth)
-        console.log('btn is click')
     }
 
     return (

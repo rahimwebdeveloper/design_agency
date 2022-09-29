@@ -7,16 +7,15 @@ import Loading from '../../../Shared/Loading';
 const MakeAdmin = () => {
     const [user, loading] = useAuthState(auth);
     const { displayName, photoURL } = user;
-    const emailRef = useRef('');
 
-    const handleSubmit = () => {
-
-        const email = emailRef.current.value;
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const email = event.target.email.value;
 
         const admin = {
             email,
         }
-
+        event.target.reset();
         fetch('https://young-coast-42098.herokuapp.com/user', {
             method: "POST",
             headers: {
@@ -27,10 +26,10 @@ const MakeAdmin = () => {
         })
             .then(res => res.json())
             .then(data => {
-                if(data.acknowledged){
+                if (data.acknowledged) {
                     toast.success('Admin Success Full')
                 }
-                else{
+                else {
                     toast.error(data?.message)
                 }
             })
@@ -57,14 +56,14 @@ const MakeAdmin = () => {
                 </div>
             </div>
             <div className='m-10 bg-white p-10'>
-                <form className='flex'>
+                <form onSubmit={handleSubmit} className='flex'>
                     <div class="form-control w-3/6">
                         <label class="label">
                             <span class="label-text text-base font-bold">Email</span>
                         </label>
-                        <input ref={emailRef} type="email" placeholder="jon@gamil.com" class="input input-bordered w-full" />
+                        <input name="email" type="email" placeholder="jon@gamil.com" class="input input-bordered w-full" required />
                     </div>
-                    <input onClick={handleSubmit} className='btn btn-sm my-10 ml-2 w-28 h-10 bg-neutral  text-white normal-case text-base' type="button" value="Submit" />
+                    <input className='btn btn-sm my-10 ml-2 w-28 h-10 bg-neutral  text-white normal-case text-base' type="submit" value="Submit" />
                 </form>
 
             </div>

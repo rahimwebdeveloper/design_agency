@@ -1,28 +1,35 @@
 import React from 'react';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import Loading from '../../Shared/Loading';
 
-const LoginPass = () => {
+const SingUp = () => {
     const navigate = useNavigate();
-    const [signInWithEmailAndPassword, user, loading, error,] = useSignInWithEmailAndPassword(auth)
+    const [createUserWithEmailAndPassword, user, loading, error,] = useCreateUserWithEmailAndPassword(auth);
+    const [updateProfile, updating, error2] = useUpdateProfile(auth);
+
 
     let message;
-    const handleLogin = event => {
+
+    const handleLogin = async (event) => {
         event.preventDefault();
 
         const email = event.target.email.value;
         const password = event.target.password.value;
-        signInWithEmailAndPassword(email, password)
+        const name = event.target.name.value;
+        createUserWithEmailAndPassword(email, password)
+        await updateProfile({ name })
         event.target.reset();
-
     }
 
-    if (error) {
-        if (error.message === "Firebase: Error (auth/wrong-password).") {
+    if (error || error2) {
+        if (error?.message === "Firebase: Error (auth/wrong-password).") {
             message = "User Not Found";
+        }
+        else if (error?.message === "FirebaseError: Firebase: Error (auth/email-already-in-use).") {
+            message = "Email already in use";
         }
         // else if(error.message === "Firebase: Error (auth/wrong-password)."){
         //     message = "Password Not Match" ;
@@ -36,23 +43,16 @@ const LoginPass = () => {
         // else if(error.message === "Firebase: Error (auth/wrong-password)."){
         //     message = "Password Not Match" ;
         // }
-        // else if(error.message === "Firebase: Error (auth/wrong-password)."){
-        //     message = "Password Not Match" ;
-        // }
     }
 
-    if (loading) {
-        <Loading />
+    if (loading || updating) {
+        return <Loading />
     }
 
     if (user) {
-        if (user?.user) {
-            toast.success('Login Success Full')
-            navigate("/")
-        }
+        toast.success("Login SuccessFull")
+        navigate("/")
     }
-
-
 
 
 
@@ -65,6 +65,12 @@ const LoginPass = () => {
                         <form onSubmit={handleLogin} action="">
                             <div className="form-control">
                                 <label className="label">
+                                    <span className="label-text">Your Name</span>
+                                </label>
+                                <input type="text" placeholder="Your Name" name="name" className="input input-bordered" required />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
                                 <input type="email" placeholder="email" name="email" className="input input-bordered" required />
@@ -74,18 +80,15 @@ const LoginPass = () => {
                                     <span className="label-text">Password</span>
                                 </label>
                                 <input type="password" placeholder="password" name="password" className="input input-bordered" required />
-                                <label className="label">
-                                    <Link to="/forget_password" className="label-text-alt link link-hover">Forgot password?</Link>
-                                </label>
                             </div>
                             {
                                 message && <p className="text-red-500" >{message},{error.message}</p>
                             }
                             <div className="form-control mt-6">
-                                <button type="submit" className="btn">Login</button>
+                                <button type="submit" className="btn">Sign Up</button>
                             </div>
                         </form>
-                        <p className="ml-2">Create New Account? <Link to="/singUp" className="text-blue-500">Sign Up</Link></p>
+                        <p className="ml-3">Already Have an Place? <Link to="/login_Email" className="text-blue-500">Login</Link></p>
                     </div>
                 </div>
             </div>
@@ -93,4 +96,4 @@ const LoginPass = () => {
     );
 };
 
-export default LoginPass;
+export default SingUp;

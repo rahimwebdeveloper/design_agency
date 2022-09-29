@@ -10,30 +10,33 @@ import AdminRouters from './authentication/AdminRouters';
 
 function App() {
   return (
-    <div className='max-w-screen-2xl'>
-      <Routes>
-        {
-          publicRouter.map(({ path, Component }, index) =>
-            <Route key={index} path={path} element={<Component />} />
-          )
-        }
-        <Route element={<PrivateRouters />} >
-          <Route path='/dashboard' element={<Dashboard />}>
-            {
-              userRouter.map(({ path, Component }, index) => <Route key={index} path={path} element={<Component />} />)
-            }
-            <Route element={<AdminRouters />}>
+    <>
+      <div className='max-w-screen-2xl'>
+        <Routes>
+          {
+            publicRouter.map(({ path, Component }, index) =>
+              <Route key={index} path={path} element={<Component />} />
+            )
+          }
+          <Route element={<PrivateRouters />} >
+            <Route path='/dashboard' element={<Dashboard />}>
               {
-                adminRouter.map(({ path, Component }, index) => <Route key={index} path={path} element={<Component />} />)
+                userRouter.map(({ path, Component }, index) => <Route key={index} path={path} element={<Component />} />)
               }
+              <Route element={<AdminRouters />}>
+                {
+                  adminRouter.map(({ path, Component }, index) => <Route key={index} path={path} element={<Component />} />)
+                }
+              </Route>
+
             </Route>
-
           </Route>
-        </Route>
 
-      </Routes>
-      <ToastContainer />
-    </div>
+        </Routes>
+        <ToastContainer />
+      </div>
+      
+    </>
   );
 }
 
