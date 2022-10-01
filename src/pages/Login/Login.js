@@ -35,7 +35,7 @@ const Login = () => {
                         <p className='text-center ml-6'>Continue With Google</p>
                     </div>
 
-                    <p className='text-center mt-3'> Can You login with Email ?<Link className='text-blue-500' to="/login_Email">Login</Link></p>
+                    <p className='text-center mt-3'>Can You login with Email ?<Link className='text-blue-500' to="/login_Email">Login</Link></p>
                 </div>
             </div>
         </div>
