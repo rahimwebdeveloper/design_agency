@@ -24,7 +24,7 @@ const Footer = () => {
                     </form>
                 </div>
             </div>
-            <p className='text-center mt-14'>copyright Orange labs 2022</p>
+            <p className='text-center mt-14'>copyright Orange labs 2023</p>
         </footer>
     );
 };

@@ -9,7 +9,7 @@ const Service = ({ services, index, refetch }) => {
 
         const value = selectRef.current.value;
         setSate(value);
-        fetch(`https://young-coast-42098.herokuapp.com/order/${id}?position=${value}`, {
+        fetch(`http://localhost:5000/order/${id}?position=${value}`, {
             method: 'PUT',
         })
             .then(res => res.json)

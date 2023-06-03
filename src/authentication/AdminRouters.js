@@ -11,7 +11,7 @@ const AdminRouters = () => {
     const location = useLocation();
 
     if (loading || adminLoading) {
-        return <p> is loading</p>
+        return <p><Loading/></p>
     }
 
     if (!user || !admin) {

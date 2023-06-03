@@ -7,7 +7,7 @@ import Navbar from './Navbar';
 
 const Feedback = ({ home, size }) => {
 
-    const { data: feedback, isLoading } = useQuery('review', () => fetch('https://young-coast-42098.herokuapp.com/review').then(res => res.json()))
+    const { data: feedback, isLoading } = useQuery('review', () => fetch('http://localhost:5000/review').then(res => res.json()))
 
     if (isLoading ) {
       return <Loading />

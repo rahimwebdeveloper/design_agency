@@ -16,7 +16,7 @@ const MakeAdmin = () => {
             email,
         }
         event.target.reset();
-        fetch('https://young-coast-42098.herokuapp.com/user', {
+        fetch('http://localhost:5000/user', {
             method: "POST",
             headers: {
                 'content-type': 'application/json',

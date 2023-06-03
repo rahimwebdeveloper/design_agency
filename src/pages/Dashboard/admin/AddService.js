@@ -33,7 +33,7 @@ const AddService = () => {
                         descriptions: data.designation,
                         image: img,
                     }
-                    fetch('https://young-coast-42098.herokuapp.com/service', {
+                    fetch('http://localhost:5000/service', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'
