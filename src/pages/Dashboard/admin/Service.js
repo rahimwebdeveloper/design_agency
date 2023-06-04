@@ -9,7 +9,7 @@ const Service = ({ services, index, refetch }) => {
 
         const value = selectRef.current.value;
         setSate(value);
-        fetch(`http://localhost:5000/order/${id}?position=${value}`, {
+        fetch(`https://server-side-rahimwebdeveloper.vercel.app/order/${id}?position=${value}`, {
             method: 'PUT',
         })
             .then(res => res.json)

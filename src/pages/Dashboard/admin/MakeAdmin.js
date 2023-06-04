@@ -16,7 +16,7 @@ const MakeAdmin = () => {
             email,
         }
         event.target.reset();
-        fetch('http://localhost:5000/user', {
+        fetch('https://server-side-rahimwebdeveloper.vercel.app/user', {
             method: "POST",
             headers: {
                 'content-type': 'application/json',

@@ -18,7 +18,7 @@ const CheckoutForm = ({ order }) => {
     const { price, companyName, email, _id, service } = order;
 
     useEffect(() => {
-        fetch('http://localhost:5000/create_payment_intent', {
+        fetch('https://server-side-rahimwebdeveloper.vercel.app/create_payment_intent', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -83,7 +83,7 @@ const CheckoutForm = ({ order }) => {
                 transactionID: paymentIntent.id,
 
             }
-            fetch(`http://localhost:5000/order/${_id}`, {
+            fetch(`https://server-side-rahimwebdeveloper.vercel.app/order/${_id}`, {
                 method: 'PATCH',
                 headers: {
                     'content-type': 'application/json'

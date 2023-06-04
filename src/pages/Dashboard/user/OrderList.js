@@ -9,7 +9,7 @@ const OrderList = () => {
     const [user, loading] = useAuthState(auth);
     const { displayName, photoURL, email } = user;
 
-    const { data: orders, isLoading } = useQuery('orders', () => fetch(`http://localhost:5000/order?email=${email}`).then(res => res.json()))
+    const { data: orders, isLoading } = useQuery('orders', () => fetch(`https://server-side-rahimwebdeveloper.vercel.app/order?email=${email}`).then(res => res.json()))
 
     const payNow = id => {
         navigate(`/dashboard/pay/${id}`)

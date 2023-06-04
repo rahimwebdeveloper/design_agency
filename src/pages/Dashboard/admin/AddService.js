@@ -33,7 +33,7 @@ const AddService = () => {
                         descriptions: data.designation,
                         image: img,
                     }
-                    fetch('http://localhost:5000/service', {
+                    fetch('https://server-side-rahimwebdeveloper.vercel.app/service', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'

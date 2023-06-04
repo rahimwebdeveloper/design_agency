@@ -24,7 +24,7 @@ const Review = () => {
             position: position,
             review: review,
         }
-        fetch('http://localhost:5000/review', {
+        fetch('https://server-side-rahimwebdeveloper.vercel.app/review', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

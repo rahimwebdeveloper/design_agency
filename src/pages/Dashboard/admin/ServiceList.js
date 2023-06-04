@@ -9,7 +9,7 @@ const ServiceList = () => {
     const [user, loading] = useAuthState(auth);
     const { displayName, photoURL } = user;
     
-    const { data: serviceList, isLoading, refetch } = useQuery('serviceList', () => fetch("http://localhost:5000/orders").then(res => res.json()))
+    const { data: serviceList, isLoading, refetch } = useQuery('serviceList', () => fetch("https://server-side-rahimwebdeveloper.vercel.app/orders").then(res => res.json()))
 
 
     if (loading || isLoading) {

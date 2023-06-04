@@ -7,7 +7,7 @@ import Navbar from './Navbar';
 
 const Feedback = ({ home, size }) => {
 
-    const { data: feedback, isLoading } = useQuery('review', () => fetch('http://localhost:5000/review').then(res => res.json()))
+    const { data: feedback, isLoading } = useQuery('review', () => fetch('https://server-side-rahimwebdeveloper.vercel.app/review').then(res => res.json()))
 
     if (isLoading ) {
       return <Loading />
