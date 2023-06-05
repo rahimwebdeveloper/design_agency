@@ -10,7 +10,7 @@ const Service = ({ service }) => {
     }
 
     return (
-        <div className={`card  ${boxShadow} `}>
+        <div className={`card shadow-2xl  `}>
             <figure>
                 <img className='h-24 w-24' src={image} alt="logo" />
             </figure>

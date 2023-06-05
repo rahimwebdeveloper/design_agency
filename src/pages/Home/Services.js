@@ -21,7 +21,7 @@ const Services = ({ home, size }) => {
       <div className='mt-10 mx-10 lg:mx-[135px]'>
         <h1 className='text-4xl font-bold text-center'>Provide awesome <span className='text-accent'>services</span></h1>
 
-        <div className='grid grid-cols-1 lg:grid-cols-3 gap-20 mt-20'>
+        <div className='grid grid-cols-1 lg:grid-cols-3 gap-20 mt-20 mb-20'>
 
           {
             services.slice(0, size).map(service => <Service
